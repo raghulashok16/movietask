@@ -27,10 +27,11 @@ const Header = () => {
                             </li>
 
                         </ul>
-                        <form className="d-flex">
+
+                        {/* <form className="d-flex">
                             <input className="form-control me-5" type="search" placeholder="Search Movie" aria-label="Search" />
-                            {/* <button class="btn btn-outline-success" type="submit">Search</button> */}
-                        </form>
+                        </form> */}
+
                     </div>
                 </div>
             </nav>
