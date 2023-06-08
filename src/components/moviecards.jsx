@@ -6,9 +6,7 @@ const MovieCards = ({ movies }) => {
         <>
             {
                 movies.map((movie) => (
-                    <div key={movie.imdbID} className="col-sm-2">
-                        <Card movie={movie} />
-                    </div>
+                    <Card key={movie.imdbID} movie={movie} />
                 ))
             }
 

@@ -1,13 +1,30 @@
+import { useEffect, useState } from "react";
+
 const Card = ({ movie }) => {
+    const [fullDetails, setFullDetails] = useState([]);
+
+    const apiCall = async (id) => {
+        const url = `http://www.omdbapi.com/?i=${id}&apikey=722ecd59`;
+        const response = await fetch(url);
+        const result = await response.json();
+        setFullDetails(result)
+
+    }
+    useEffect(() => {
+        apiCall(movie.imdbID)
+    })
     return (
         <>
-            <div className="card my-3" >
-                <img src={movie.Poster} className="card-img-top" alt="..." />
-                <div className="card-body">
-                    <p className="">{movie.Title}</p>
-                    <p className="">{movie.Year}</p>
-                    <p className="">{movie.Type}</p>
-                    <p className="">{movie.imdbID}</p>
+            <div className="col-lg-5 my-3 m-1 border border-dark align-items-end rounded-1"  >
+                <div className="row">
+                    <div className="col p-0 m-0">
+                        <img src={movie.Poster} className="col-6 card-img-top  rounded-1 p-0 mt-auto " alt="Image Not Found" />
+                    </div>
+                    <div className="col-6 ms-2 card-body">
+                        <p className="">Title : {movie.Title}</p>
+                        <p className="">Year : {movie.Year}</p>
+                        <p className="">IMDB Rating : {fullDetails.imdbRating}</p>
+                    </div>
                 </div>
             </div >
 

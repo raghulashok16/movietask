@@ -23,6 +23,9 @@ const List = () => {
     }
     useEffect(() => {
         apiCall(searchText);
+        if (searchText == "") {
+            setMovies([]);
+        }
     }, [searchText])
 
     const onChangeEvent = (e) => {
@@ -34,15 +37,17 @@ const List = () => {
     return (
         <>
             {
-                searchText != "" ? (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">total result found = {total}</p>) : (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">Enter movie name to search</p>)
+                (searchText != "") ? (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">total result found = {total}</p>) : (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">Enter movie name to search</p>)
             }
-
             <div className="container mt-0 mb-4">
-
-                <SearchBox placeholder='search movie' onChangeHandler={onChangeEvent} />
-
-                <div className="row justify-content-start align-items-start">
-                    <MovieCards movies={movies} />
+                <SearchBox
+                    placeholder='search movie'
+                    onChangeHandler={onChangeEvent}
+                />
+                <div className="row justify-content-evenly">
+                    <MovieCards
+                        movies={movies}
+                    />
                 </div>
             </div>
         </>
