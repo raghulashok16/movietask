@@ -1,5 +1,5 @@
 import Card from "./card";
-const MovieCard = ({ movies }) => {
+const MovieCards = ({ movies }) => {
     // console.log(movies);
     // console.log(props.MovieCard);
     return (
@@ -16,4 +16,4 @@ const MovieCard = ({ movies }) => {
     )
 };
 
-export default MovieCard;
+export default MovieCards;
