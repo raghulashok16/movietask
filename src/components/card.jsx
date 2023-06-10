@@ -4,7 +4,7 @@ const Card = ({ movie }) => {
     const [fullDetails, setFullDetails] = useState([]);
 
     const apiCall = async (id) => {
-        const url = `http://www.omdbapi.com/?i=${id}&apikey=722ecd59`;
+        const url = `http://www.omdbapi.com/?i=${id}&apikey=9ad3dd59`;
         const response = await fetch(url);
         const result = await response.json();
         setFullDetails(result)
@@ -15,7 +15,7 @@ const Card = ({ movie }) => {
     })
     return (
         <>
-            <div className="col-lg-5 my-3 m-1 border border-dark align-items-end rounded-1"  >
+            <div className="col p-3 border border-dark align-items-end rounded-1" >
                 <div className="row">
                     <div className="col p-0 m-0">
                         <img src={movie.Poster} className="col-6 card-img-top  rounded-1 p-0 mt-auto " alt="Image Not Found" />

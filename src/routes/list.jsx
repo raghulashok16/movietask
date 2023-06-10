@@ -6,14 +6,20 @@ const List = () => {
     const [movies, setMovies] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [total, setTotal] = useState('0');
-    const [page, setPage] = useState('1')
+    const [page, setPage] = useState(1)
 
     const apiCall = async (searchText, page) => {
-        const url = `http://www.omdbapi.com/?s=${searchText}&apikey=722ecd59&page=${page}`;
+        const url = `http://www.omdbapi.com/?s=${searchText}&apikey=9ad3dd59&page=${page}`;
         const response = await fetch(url);
         const result = await response.json();
+        console.log(result.Error);
         if (result.Search) {
-            setMovies(result.Search);
+            if (movies === null) {
+                setMovies(result.Search);
+            } else {
+                setMovies(movies.concat(result.Search));
+            }
+
             setTotal(result.totalResults);
         }
         if (result.Error === "Too many results." || result.Error === "Movie not found!") {
@@ -23,11 +29,14 @@ const List = () => {
 
     }
     useEffect(() => {
-        apiCall(searchText, page);
+        if (searchText !== null) {
+            apiCall(searchText, page);
+        }
         if (searchText === "") {
             setMovies([]);
+            setPage(1);
         }
-    }, [searchText])
+    }, [searchText, page])
 
     const onChangeEvent = (e) => {
         const typedString = e.target.value;
@@ -40,7 +49,7 @@ const List = () => {
             {
                 (searchText !== "") ? ((total === 'Movie not found!') ? (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">Movie not found!</p>) : (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">total result found = {total}</p>)) : (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">Enter movie name to search</p>)
             }
-            <div className="container mt-0 mb-4">
+            <div className="container-fluid mt-0 mb-4">
                 <SearchBox
                     placeholder='search movie'
                     onChangeHandler={onChangeEvent}
