@@ -9,10 +9,8 @@ const MovieCards = ({ movies, setMovies, page, setPage }) => {
         <>
             {movies.length === 0 || (
                 <InfiniteScroll dataLength={movies.length} next={() => { setPage(page + 1) }} hasMore={true}
-                    loader={<div className="spinner-border text-center" role="status">
-                        <span className="visually-hidden"></span>
-                    </div>}
-                    className="">
+                    loader={<p className="w-100 text-center">Loading...</p>}
+                    className="d-flex flex-wrap justify-content-evenly">
                     {
                         movies.map((movie) => (
                             <Card key={movie.imdbID} movie={movie} />

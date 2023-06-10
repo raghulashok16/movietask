@@ -16,17 +16,17 @@ const List = () => {
         if (result.Search) {
             if (movies === null) {
                 setMovies(result.Search);
-            } else {
+            } else if (page > 1) {
                 setMovies(movies.concat(result.Search));
+            } else {
+                setMovies(result.Search);
             }
-
             setTotal(result.totalResults);
         }
         if (result.Error === "Too many results." || result.Error === "Movie not found!") {
             setMovies([]);
             setTotal(result.Error);
         }
-
     }
     useEffect(() => {
         if (searchText !== null) {

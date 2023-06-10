@@ -15,12 +15,12 @@ const Card = ({ movie }) => {
     })
     return (
         <>
-            <div className="col p-3 border border-dark align-items-end rounded-1" >
+            <div className="col-lg-5 m-3 border border-dark align-items-end rounded-1" >
                 <div className="row">
-                    <div className="col p-0 m-0">
-                        <img src={movie.Poster} className="col-6 card-img-top  rounded-1 p-0 mt-auto " alt="Image Not Found" />
+                    <div className="col">
+                        <img src={movie.Poster} className="col-6 card-img-top  rounded-1  " alt="Image Not Found" />
                     </div>
-                    <div className="col-6 ms-2 card-body">
+                    <div className="col-6  card-body">
                         <p className="">Title : {movie.Title}</p>
                         <p className="">Year : {movie.Year}</p>
                         <p className="">IMDB Rating : {fullDetails.imdbRating}</p>
