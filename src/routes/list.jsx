@@ -7,13 +7,16 @@ const List = () => {
     const [searchText, setSearchText] = useState('');
     const [total, setTotal] = useState('0');
     const [page, setPage] = useState(1)
+    let count = 0;
 
     const apiCall = async (searchText, page) => {
-        const url = `http://www.omdbapi.com/?s=${searchText}&apikey=35371a2&page=${page}`;
+        const url = `http://www.omdbapi.com/?s=${searchText}&apikey=9d1abceb&page=${page}`;
+        console.log("requested 1");
         const response = await fetch(url);
         const result = await response.json();
         console.log(result.Error);
-        console.log(page);
+        // console.log(page);
+
         if (result.Search) {
             if (movies === null) {
                 setMovies(result.Search);
@@ -37,7 +40,7 @@ const List = () => {
             setMovies([]);
             setPage(1);
         }
-    }, [searchText, page])
+    }, [page, searchText])
 
     const onChangeEvent = (e) => {
         const typedString = e.target.value;
@@ -51,15 +54,10 @@ const List = () => {
                 (searchText !== "") ? ((total === 'Movie not found!') ? (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">Movie not found!</p>) : (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">total result found = {total}</p>)) : (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">Enter movie name to search</p>)
             }
             <div className="container-fluid mt-0 mb-4">
-                <SearchBox
-                    placeholder='search movie'
-                    onChangeHandler={onChangeEvent}
-                />
+                <SearchBox placeholder='search movie' onChangeHandler={onChangeEvent} />
+                {/* <button type="button" onClick={apiCall} class="btn btn-secondary">Secondary</button> */}
                 <div className="row justify-content-evenly">
-
-                    <MovieCards
-                        movies={movies} page={page} setPage={setPage}
-                    />
+                    <MovieCards movies={movies} page={page} setPage={setPage} total={total} />
                 </div>
             </div>
         </>

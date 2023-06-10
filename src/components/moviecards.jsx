@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import Card from "./card";
 import InfiniteScroll from "react-infinite-scroll-component";
-const MovieCards = ({ movies, page, setPage }) => {
+const MovieCards = ({ movies, page, setPage, total }) => {
     const [fetchWork, setFetchWork] = useState(false)
     const [has, setHas] = useState(true)
-    console.log(fetchWork, movies, page);
-    useEffect(() => {
-        if (page >= 3) {
-            setHas(false);
-        }
-    }, [page])
+    // console.log(fetchWork, movies, page);
+    // useEffect(() => {
+    //     if (page >= 7) {
+    //         setHas(false);
+    //     }
+    // }, [page])
 
     return (
         <>
             {movies.length === 0 || (
-                <InfiniteScroll dataLength={movies.length}
+                <InfiniteScroll dataLength={total}
                     next={() => {
                         if (fetchWork === false) {
                             setPage(page + 1)
@@ -24,8 +24,8 @@ const MovieCards = ({ movies, page, setPage }) => {
                     loader={<p className="w-100 text-center">Loading...</p>}
                     className="d-flex flex-wrap justify-content-evenly"
                     endMessage={
-                        <p className="text-center">
-                            <b>Restricted to show only 30 movies because this a free api</b>
+                        <p className="text-center w-100">
+                            <b>End of List</b>
                         </p>
                     }
                 >
@@ -37,7 +37,6 @@ const MovieCards = ({ movies, page, setPage }) => {
                 </InfiniteScroll >
             )
             }
-
         </>
     )
 };

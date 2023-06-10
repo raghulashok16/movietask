@@ -9,7 +9,9 @@ const SearchBox = ({ placeholder, onChangeHandler }) => {
                         placeholder={placeholder}
                         onChange={onChangeHandler}
                     />
+
                 </div>
+
             </div>
         </>
     )
