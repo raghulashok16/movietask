@@ -2,20 +2,27 @@ import { useState } from "react";
 import Card from "./card";
 import InfiniteScroll from "react-infinite-scroll-component";
 const MovieCards = ({ movies, setMovies, page, setPage }) => {
-
-    console.log(page);
+    const [fetchWork, setFetchWork] = useState(false)
+    // console.log(page);
 
     return (
         <>
             {movies.length === 0 || (
-                <InfiniteScroll dataLength={movies.length} next={() => { setPage(page + 1) }} hasMore={true}
+                <InfiniteScroll dataLength={movies.length}
+                    next={() => {
+                        if (fetchWork === false) {
+                            setPage(page + 1)
+                        }
+                    }} hasMore={true}
                     loader={<p className="w-100 text-center">Loading...</p>}
                     className="d-flex flex-wrap justify-content-evenly">
+
                     {
                         movies.map((movie) => (
                             <Card key={movie.imdbID} movie={movie} />
                         ))
                     }
+
                 </InfiniteScroll>
             )
             }

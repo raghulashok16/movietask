@@ -4,14 +4,15 @@ const Card = ({ movie }) => {
     const [fullDetails, setFullDetails] = useState([]);
 
     const apiCall = async (id) => {
-        const url = `http://www.omdbapi.com/?i=${id}&apikey=9ad3dd59`;
+        const url = `http://www.omdbapi.com/?i=${id}&apikey=64759f5`;
         const response = await fetch(url);
         const result = await response.json();
         setFullDetails(result)
-
     }
     useEffect(() => {
-        apiCall(movie.imdbID)
+        if (fullDetails.imdbRating !== null) {
+            apiCall(movie.imdbID)
+        }
     })
     return (
         <>

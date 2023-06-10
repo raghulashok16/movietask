@@ -9,10 +9,11 @@ const List = () => {
     const [page, setPage] = useState(1)
 
     const apiCall = async (searchText, page) => {
-        const url = `http://www.omdbapi.com/?s=${searchText}&apikey=9ad3dd59&page=${page}`;
+        const url = `http://www.omdbapi.com/?s=${searchText}&apikey=64759f5&page=${page}`;
         const response = await fetch(url);
         const result = await response.json();
         console.log(result.Error);
+        console.log(page);
         if (result.Search) {
             if (movies === null) {
                 setMovies(result.Search);
