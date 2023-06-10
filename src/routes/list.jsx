@@ -9,7 +9,7 @@ const List = () => {
     const [page, setPage] = useState(1)
 
     const apiCall = async (searchText, page) => {
-        const url = `http://www.omdbapi.com/?s=${searchText}&apikey=64759f5&page=${page}`;
+        const url = `http://www.omdbapi.com/?s=${searchText}&apikey=35371a2&page=${page}`;
         const response = await fetch(url);
         const result = await response.json();
         console.log(result.Error);
@@ -24,13 +24,13 @@ const List = () => {
             }
             setTotal(result.totalResults);
         }
-        if (result.Error === "Too many results." || result.Error === "Movie not found!") {
+        if (result.Error === "Too many results." || result.Error === "Movie not found!" || result.Error === "Request limit reached!") {
             setMovies([]);
             setTotal(result.Error);
         }
     }
     useEffect(() => {
-        if (searchText !== null) {
+        if (searchText !== "") {
             apiCall(searchText, page);
         }
         if (searchText === "") {
@@ -58,7 +58,7 @@ const List = () => {
                 <div className="row justify-content-evenly">
 
                     <MovieCards
-                        movies={movies} setMovies={setMovies} page={page} setPage={setPage}
+                        movies={movies} page={page} setPage={setPage}
                     />
                 </div>
             </div>
