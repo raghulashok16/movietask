@@ -10,15 +10,19 @@ const List = () => {
     // let count = 0;
 
     const apiCall = async (searchText, page) => {
-        const url = `http://www.omdbapi.com/?s=${searchText}&apikey=1935caa6&page=${page}`;
+        const url = `http://www.omdbapi.com/?s=${searchText}&apikey=cb859cb&page=${page}`;
         // console.log("movie api call");
         const response = await fetch(url);
         const result = await response.json();
         console.log(result.Error);
         // console.log(page);
-
         if (result.Search) {
+            // console.log(...movies, ...result.Search);
+            // Array.from(set)
             setMovies(movies.concat(result.Search));
+            // const set = new Set([movies.concat(result.Search)]);
+            // console.log(JSON.stringify([...set]));
+            // // setMovies(JSON.stringify([...set]))
             setTotal(result.totalResults);
         }
         if (result.Error === "Too many results." || result.Error === "Movie not found!" || result.Error === "Request limit reached!") {
@@ -26,7 +30,6 @@ const List = () => {
             setPage(1);
             setTotal(result.Error);
         }
-
     }
     useEffect(() => {
         if (page > 1) {
@@ -35,20 +38,25 @@ const List = () => {
     }, [page])
 
     useEffect(() => {
-        if (searchText !== "") {
+        if (searchText.length > 0) {
             setMovies([]);
             setPage(1);
-            apiCall(searchText, page);
+            setTimeout(() => {
+                apiCall(searchText, page);
+            }, 1000)
         }
-        if (searchText === "") {
+        if (searchText.length === 0) {
             setMovies([]);
             setPage(1);
         }
     }, [searchText])
 
     const onChangeEvent = (e) => {
-        const typedString = e.target.value;
-        setSearchText(typedString);
+        setTimeout(() => {
+            const typedString = e.target.value;
+            setSearchText(typedString);
+        }, 200)
+
     }
 
 
@@ -61,7 +69,7 @@ const List = () => {
                 <SearchBox placeholder='search movie' onChangeHandler={onChangeEvent} />
                 {/* <button type="button" onClick={apiCall} class="btn btn-secondary">Secondary</button> */}
                 <div>
-                    <MovieCards movies={movies} page={page} setPage={setPage} total={total} />
+                    <MovieCards movies={movies} page={page} setPage={setPage} total={total} apiCall={apiCall} setMovies={setMovies} />
                 </div>
             </div>
         </>
