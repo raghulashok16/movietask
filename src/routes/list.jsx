@@ -7,40 +7,44 @@ const List = () => {
     const [searchText, setSearchText] = useState('');
     const [total, setTotal] = useState('0');
     const [page, setPage] = useState(1)
-    let count = 0;
+    // let count = 0;
 
     const apiCall = async (searchText, page) => {
         const url = `http://www.omdbapi.com/?s=${searchText}&apikey=9d1abceb&page=${page}`;
-        console.log("requested 1");
+        // console.log("movie api call");
         const response = await fetch(url);
         const result = await response.json();
         console.log(result.Error);
         // console.log(page);
 
         if (result.Search) {
-            if (movies === null) {
-                setMovies(result.Search);
-            } else if (page > 1) {
-                setMovies(movies.concat(result.Search));
-            } else {
-                setMovies(result.Search);
-            }
+            setMovies(movies.concat(result.Search));
             setTotal(result.totalResults);
         }
         if (result.Error === "Too many results." || result.Error === "Movie not found!" || result.Error === "Request limit reached!") {
             setMovies([]);
+            setPage(1);
             setTotal(result.Error);
         }
+
     }
     useEffect(() => {
+        if (page > 1) {
+            apiCall(searchText, page);
+        }
+    }, [page])
+
+    useEffect(() => {
         if (searchText !== "") {
+            setMovies([]);
+            setPage(1);
             apiCall(searchText, page);
         }
         if (searchText === "") {
             setMovies([]);
             setPage(1);
         }
-    }, [page, searchText])
+    }, [searchText])
 
     const onChangeEvent = (e) => {
         const typedString = e.target.value;
@@ -56,7 +60,7 @@ const List = () => {
             <div className="container-fluid mt-0 mb-4">
                 <SearchBox placeholder='search movie' onChangeHandler={onChangeEvent} />
                 {/* <button type="button" onClick={apiCall} class="btn btn-secondary">Secondary</button> */}
-                <div className="row justify-content-evenly">
+                <div>
                     <MovieCards movies={movies} page={page} setPage={setPage} total={total} />
                 </div>
             </div>
