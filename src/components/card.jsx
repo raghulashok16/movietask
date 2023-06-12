@@ -5,7 +5,7 @@ const Card = ({ movie }) => {
     const [fullDetails, setFullDetails] = useState([]);
 
     const apiCall2 = async (id) => {
-        const url = `http://www.omdbapi.com/?i=${id}&apikey=9d1abceb`;
+        const url = `http://www.omdbapi.com/?i=${id}&apikey=1935caa6`;
         // console.log("imdb id api call");
         const response = await fetch(url);
         const result = await response.json();
