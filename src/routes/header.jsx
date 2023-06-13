@@ -15,7 +15,7 @@ const Header = () => {
                             <li className="nav-item">
                                 <Link to='favourite' className=" nav-link text-white fs-5">Favourite</Link>
                             </li>
-                            <li className="nav-item dropdown">
+                            {/* <li className="nav-item dropdown">
                                 <a className="nav-link text-white fs-5 dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Dropdown
                                 </a>
@@ -24,7 +24,7 @@ const Header = () => {
                                     <li><a className="dropdown-item" href="#">Another action</a></li>
                                     <li><a className="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
-                            </li>
+                            </li> */}
 
                         </ul>
 
