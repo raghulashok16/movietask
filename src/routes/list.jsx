@@ -12,7 +12,7 @@ const List = () => {
 
     const apiCall = async (searchText, searchYear, page) => {
         console.log(searchYear);
-        const url = `http://www.omdbapi.com/?s=${searchText}&y=${searchYear}&apikey=cb859cb&page=${page}`;
+        const url = `http://www.omdbapi.com/?s=${searchText}&y=${searchYear}&apikey=eda7946a&page=${page}`;
         // console.log("movie api call");
         const response = await fetch(url);
         const result = await response.json();
