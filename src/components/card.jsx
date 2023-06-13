@@ -22,7 +22,10 @@ const Card = ({ movie, indexx }) => {
         if (cons === null || cons === undefined) {
             localStorage.setItem("imdbId", JSON.stringify([movie.imdbID]));
         } else {
-            localStorage.setItem("imdbId", JSON.stringify([movie.imdbID, cons]));
+            cons.push(movie.imdbID);
+            // console.log(typeof movie.imdbID);
+            // console.log(cons1);
+            localStorage.setItem("imdbId", JSON.stringify(cons));
         }
         // localStorage.removeItem("imdbId");
     }

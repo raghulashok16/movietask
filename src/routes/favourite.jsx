@@ -28,7 +28,7 @@ const Favourite = () => {
             }
             <div className="row justify-content-evenly">
                 {fav.map((id, i) => (
-                    <FavCard key={i} idd={id} fav={fav} />
+                    <FavCard key={i} idd={id} fav={fav} setFav={setFav} />
                 ))
                 }
             </div>
