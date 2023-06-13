@@ -1,6 +1,6 @@
+ USED REACT FOR THIS TASK...
 
-
-1. This application  fetches data from an external API to retrieve a list of movies(Omdb API Used).
+1. This application fetches data from an external API to retrieve a list of movies(Omdb API Used).
 2. Displays the list of movies, including the following details,(Title,Poster image,Release year,Average rating).
 3. Implemented a search functionality that allows users to search for movies by Title.
 4. Implemented a search functionality that allows users to Filter the movies by Year.
