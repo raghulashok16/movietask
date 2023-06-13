@@ -5,12 +5,14 @@ import SearchBox from "../components/searchbox";
 const List = () => {
     const [movies, setMovies] = useState([]);
     const [searchText, setSearchText] = useState('');
-    const [total, setTotal] = useState('0');
+    const [searchYear, setSearchYear] = useState('');
+    const [total, setTotal] = useState("0");
     const [page, setPage] = useState(1)
     // let count = 0;
 
-    const apiCall = async (searchText, page) => {
-        const url = `http://www.omdbapi.com/?s=${searchText}&apikey=cb859cb&page=${page}`;
+    const apiCall = async (searchText, searchYear, page) => {
+        console.log(searchYear);
+        const url = `http://www.omdbapi.com/?s=${searchText}&y=${searchYear}&apikey=cb859cb&page=${page}`;
         // console.log("movie api call");
         const response = await fetch(url);
         const result = await response.json();
@@ -33,7 +35,7 @@ const List = () => {
     }
     useEffect(() => {
         if (page > 1) {
-            apiCall(searchText, page);
+            apiCall(searchText, searchYear, page);
         }
     }, [page])
 
@@ -42,21 +44,22 @@ const List = () => {
             setMovies([]);
             setPage(1);
             setTimeout(() => {
-                apiCall(searchText, page);
+                apiCall(searchText, searchYear, page);
             }, 1000)
         }
         if (searchText.length === 0) {
             setMovies([]);
             setPage(1);
         }
-    }, [searchText])
+    }, [searchText, searchYear])
 
     const onChangeEvent = (e) => {
-        setTimeout(() => {
-            const typedString = e.target.value;
-            setSearchText(typedString);
-        }, 200)
-
+        const typedString = e.target.value;
+        setSearchText(typedString);
+    }
+    const onChangeEvent2 = (e) => {
+        const typedString2 = e.target.value;
+        setSearchYear(typedString2);
     }
 
 
@@ -66,7 +69,11 @@ const List = () => {
                 (searchText !== "") ? ((total === 'Movie not found!') ? (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">Movie not found!</p>) : (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">total result found = {total}</p>)) : (<p className="badge fs-5 ms-3 mt-3 text-bg-dark">Enter movie name to search</p>)
             }
             <div className="container-fluid mt-0 mb-4">
-                <SearchBox placeholder='search movie' onChangeHandler={onChangeEvent} />
+                <div className="row justify-content-end">
+                    <div className="col-5"><SearchBox placeholder='search movie' onChangeHandler={onChangeEvent} /></div>
+                    <div className="col-3"><SearchBox placeholder='search year' onChangeHandler={onChangeEvent2} /></div>
+                </div>
+
                 {/* <button type="button" onClick={apiCall} class="btn btn-secondary">Secondary</button> */}
                 <div>
                     <MovieCards movies={movies} page={page} setPage={setPage} total={total} apiCall={apiCall} setMovies={setMovies} />
