@@ -5,12 +5,14 @@ import SearchBox from "../components/searchbox";
 const List = () => {
     const [movies, setMovies] = useState([]);
     const [searchText, setSearchText] = useState('');
+    const [filterGenre, setFliterGenre] = useState([]);
     const [searchYear, setSearchYear] = useState('');
     const [total, setTotal] = useState("0");
     const [page, setPage] = useState(1)
     // let count = 0;
 
     const apiCall = async (searchText, searchYear, page) => {
+        console.log(filterGenre);
         console.log(searchYear);
         const url = `http://www.omdbapi.com/?s=${searchText}&y=${searchYear}&apikey=eda7946a&page=${page}`;
         // console.log("movie api call");
@@ -61,6 +63,10 @@ const List = () => {
         const typedString2 = e.target.value;
         setSearchYear(typedString2);
     }
+    const onChangeEvent3 = (e) => {
+        const typedString3 = e.target.value;
+        setFliterGenre(typedString3);
+    }
 
 
     return (
@@ -72,11 +78,12 @@ const List = () => {
                 <div className="row justify-content-end">
                     <div className="col-5"><SearchBox placeholder='search movie' onChangeHandler={onChangeEvent} /></div>
                     <div className="col-3"><SearchBox placeholder='search year' onChangeHandler={onChangeEvent2} /></div>
+                    <div className="col-3"><SearchBox placeholder='filter genre' onChangeHandler={onChangeEvent3} /></div>
                 </div>
 
                 {/* <button type="button" onClick={apiCall} class="btn btn-secondary">Secondary</button> */}
                 <div>
-                    <MovieCards movies={movies} page={page} setPage={setPage} total={total} apiCall={apiCall} setMovies={setMovies} />
+                    <MovieCards movies={movies} page={page} setPage={setPage} total={total} apiCall={apiCall} setMovies={setMovies} filterGenre={filterGenre} />
                 </div>
             </div>
         </>
