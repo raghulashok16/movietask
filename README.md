@@ -1,3 +1,6 @@
+project link : 
+https://deltermovie.netlify.app/
+ 
  USED REACT FOR THIS TASK...
 
 1. This application fetches data from an external API to retrieve a list of movies(Omdb API Used).
